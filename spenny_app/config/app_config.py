@@ -15,6 +15,5 @@ class CommonConfig:
     app_port = environ.get("APP_PORT", "4500")
     debug = environ.get("APP_DEBUG", False)
 
-    TEMPORARY_JWT_EXP_TIME_MINS = int(environ.get("TEMPORARY_JWT_EXP_TIME_MINS", 60))
     JWT_EXP_TIME_MINS = int(environ.get("JWT_EXP_TIME_MINS", 120))
 

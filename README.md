@@ -50,10 +50,8 @@
 |DB_ENABLE_SSL                         | True if SSL certificate is used by Database                                 |False                                       |              |
 |APP_PORT                 |4500 #Port on which main-console flask app will run                          |4500                                        |              |
 |APP_DEBUG                |False #main-console Flask app debug mode                                     |False                                       |              |
-|FERNET_KEY                            | An Alphanumeric Fernet string that is used to encrypt and decrypt MFA secret| k-1k6diILafCUt63-IooJplOybLy1i_hsft4gzXvt_Q|              |
 |WTF_CSRF_ENABLED                      | False (To ignore CORS errors)                                                |                                            |              |
 |FLASK_APP_SECRET_KEY                  | Flask app secret key to manage sessions                                     |                                            |              |
-|TEMPORARY_JWT_EXP_TIME_MINS           | Lifetime of temporary JWT token that is generated during signup and login   |60                                          |              |
 |JWT_EXP_TIME_MINS                     | JWT token that is stored in session                                         |120                                         |              |
 
 

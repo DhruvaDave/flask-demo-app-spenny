@@ -17,6 +17,7 @@
         ` python3 run.py` 
 
     ###### Which will run project on 4500 Port
+    ###### Check API Documentation on /swagger
 
 
 ### Unit testing

@@ -35,9 +35,6 @@
     ###### HTML Report generation:
     ` pytest --cov-report html:cov_html --cov=spenny_app `
 
-    ###### Note:
-    The path for the html report file will be main-console/cov_html/index.html."cov_html" is the folder
-
 
 ### Env variable 
 |Variable Name                         |Description                                                                  |Default value                               |Optional Value|
@@ -49,8 +46,8 @@
 |DB_NAME                               | Database name (required                                                     |                                            |              |
 |DB_POOLSIZE                           | database pool size                                                          |5                                           |              |
 |DB_ENABLE_SSL                         | True if SSL certificate is used by Database                                 |False                                       |              |
-|APP_PORT                 |4500 #Port on which main-console flask app will run                          |4500                                        |              |
-|APP_DEBUG                |False #main-console Flask app debug mode                                     |False                                       |              |
+|APP_PORT                 |4500 #Port on which spenny flask app will run                          |4500                                        |              |
+|APP_DEBUG                |False #spenny Flask app debug mode                                     |False                                       |              |
 |WTF_CSRF_ENABLED                      | False (To ignore CORS errors)                                                |                                            |              |
 |FLASK_APP_SECRET_KEY                  | Flask app secret key to manage sessions                                     |                                            |              |
 |JWT_EXP_TIME_MINS                     | JWT token that is stored in session                                         |120                                         |              |

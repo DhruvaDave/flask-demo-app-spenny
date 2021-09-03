@@ -10,7 +10,6 @@ import datetime
 from werkzeug.datastructures import MultiDict
 from spenny_app.models.common_models import UserInvitationStatusType
 from spenny_app.utils.jwt_encipherment import generate_jwt_token
-from spenny_app.utils.http_response_handler import HttpResponseHandler
 from spenny_app.models.user_management import TblUsers
 from spenny_app.exceptions.http_exception import HttpException
 from spenny_app.common import constants
@@ -25,7 +24,6 @@ from spenny_app.services.user_management_service.user_management_data import (
 
 #mockpath
 fetch_user_by_email_mockpath = "spenny_app.services.user_management_service.user_management_data.UserRepo.fetch_user_by_email"
-mock_generate_jwt_token = "spenny_app.services.user_management_service.user_management_data.generate_jwt_token"
 mock_create_session = "spenny_app.services.user_management_service.user_management_data.create_session"
 
 
@@ -76,10 +74,9 @@ class TestLogin(unittest.TestCase):
         with self.app_context:
             with mock.patch(fetch_user_by_email_mockpath, return_value=self.table_users):
                 with mock.patch(self.form_submitted,return_value=True):
-                    with mock.patch(mock_generate_jwt_token, return_value=self.jwt):
-                        with mock.patch(mock_create_session):
-                            response, code = UsersData.user_login(self.login_form)
-                            assert code == 200
+                    with mock.patch(mock_create_session):
+                        response, code = UsersData.user_login(self.login_form)
+                        assert code == 200
 
 
     def test_invalid_login_data(self):

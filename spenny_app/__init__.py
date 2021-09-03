@@ -5,7 +5,7 @@ import logging
 from flask import Flask, g, request
 from spenny_app.config.app_config import CommonConfig 
 
-logger = logging.getLogger("Main-Console")
+logger = logging.getLogger(__name__)
 
 
 def create_app():

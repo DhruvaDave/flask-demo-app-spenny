@@ -8,19 +8,7 @@ import datetime
 
 from spenny_app.common import constants
 from spenny_app.exceptions.http_exception import HttpException
-
-from spenny_app.repository.user_repository import UserRepo
-
-from spenny_app.utils.common import StringUtils
-from spenny_app.utils.password_enc import generate_password_hash
-from spenny_app.common import messages
-
-from spenny_app.config.app_config import CommonConfig
-from spenny_app.common import constants as mc_constants
-from spenny_app.repository.user_repository import UserRepo
 from spenny_app.models.common_models import UserInvitationStatusType
-from spenny_app.utils.jwt_encipherment import generate_jwt_token
-from spenny_app.utils.http_response_handler import HttpResponseHandler
 from spenny_app.models.user_management import TblUsers
 
 
@@ -33,9 +21,7 @@ from spenny_app.services.user_management_service.user_management_data import (
 )
 
 mock_create_user = "spenny_app.services.user_management_service.user_management_data.UserRepo.create_users"
-mock_fetch_tenant_user_by_email = "main_console_app.services.user_management_service.user_management_data.TblMCUsersRepo.fetch_tenant_user_by_email"
-mock_send_mfa_code = "main_console_app.services.user_management_service.user_management_data.send_mfa_code"
-mock_update_by = "main_console_app.services.user_management_service.user_management_data.TblMCUsersRepo.update_by"
+mock_fetch_user_by_email = "spenny_app.services.user_management_service.user_management_data.UserRepo.fetch_user_by_email"
 
 class TestUser(unittest.TestCase):
     '''
@@ -92,10 +78,11 @@ class TestUser(unittest.TestCase):
         """
         with self.app_context:
             with mock.patch(mock_create_user, return_value=self.table_users.user_id):
-                with mock.patch("spenny_app.common.forms.user_management_forms.SignupForm.is_submitted",
-                                return_value=True):
-                    response = UsersData.user_sign_up(self.signup_form)
-                    assert response.status_code == 200
+                with mock.patch(mock_fetch_user_by_email, return_value=False):
+                    with mock.patch("spenny_app.common.forms.user_management_forms.SignupForm.is_submitted",
+                                    return_value=True):
+                        response = UsersData.user_sign_up(self.signup_form)
+                        assert response.status_code == 200
 
 if __name__ == "__main__":
     unittest.main()

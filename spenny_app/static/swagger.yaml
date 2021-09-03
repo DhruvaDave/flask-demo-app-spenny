@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  description: Spenny
+  version: 1.0.0
+  title: API Specification
+
+tags:
+  - name: Users
+    description: User APIs
+  - name: Tweets
+    description: Tweets APIs
+  - name: Followers
+    description: Followers APIs
+  
+paths:
+  
+  /api/v1/users/signup:
+    post:
+      tags:
+        - Users
+      summary: Add Users(Signup)
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request or Invalid parameters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/signupRequest'
+            example:
+              firstname: Dhruva
+              lastname: Dave
+              email: dhruva@gmail.com
+              phone: 555-555-1234
+              password: 123dd
+  
+  /api/v1/users/login:
+    post:
+      tags:
+        - Users
+      summary: Login
+      responses:
+        '200':
+          description: User Logged In
+        '400':
+          description: Bad request or Invalid parameters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loginRequest'
+            example:
+              email: dhruva@gmail.com
+              password: 123dd
+  
+
+  /api/v1/tweets:
+    post:
+      tags:
+        - Tweets
+      summary: Post Tweet
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request or Invalid parameters
+        '500':
+          description: Internal server error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tweetRequest'
+            example:
+              tweet: My First Tweet
+  
+  /api/v1/tweets/followers:
+    get:
+      tags:
+        - Tweets
+      summary: Get Followers Tweet
+      responses:
+        '200':
+          description: Tweets Fetched Successfully
+        '400':
+          description: Bad request or Invalid parameters
+        '500':
+          description: Internal server error
+  
+
+  /api/v1/followers:
+    post:
+      tags:
+        - Followers
+      summary: Add Followers
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request or Invalid parameters
+        '500':
+          description: Internal server error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/addfollowerRequest'
+            example:
+              follows_user_id: 2
+
+
+components:
+  schemas:
+    signupRequest:
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        password:
+          type: string
+    
+    loginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    
+    tweetRequest:
+      type: object
+      properties:
+        tweet:
+          type: string
+        
+    addfollowerRequest:
+      type: object
+      properties:
+        follows_user_id:
+          type: string
+
+    

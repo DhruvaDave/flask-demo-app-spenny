@@ -26,8 +26,12 @@ class UsersData:
     def user_sign_up(form):
         if not form.validate_on_submit():
             logging.debug(messages.INVALID_FORM_MESSAGE, form.errors)
-            raise HttpException(messages.INVALID_FORM_MESSAGE,
-                                constants.BAD_REQUEST, 400)
+            response_dict = {
+                'code': constants.BAD_REQUEST,
+                'message': form.errors
+            }
+            return jsonify(response_dict), 400
+            
 
         user_data = UserRepo.fetch_user_by_email(email=form.email.data)
         if user_data:
@@ -63,8 +67,12 @@ class UsersData:
         Login API Service Method
         """
         if not form.validate_on_submit():
-            raise HttpException(messages.INVALID_FORM_MESSAGE,
-                                constants.BAD_REQUEST, 400)
+            response_dict = {
+                'code': constants.BAD_REQUEST,
+                'message': form.errors
+            }
+            return jsonify(response_dict), 400
+            
         email = form.email.data
         entered_password = form.password.data
         user_data = UserRepo.fetch_user_by_email(email=email)
